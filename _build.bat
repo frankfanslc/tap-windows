@@ -28,20 +28,17 @@ set mymode=fre
 
 echo Building %myos%-%myprofile%-%mymode%
 
-call "%DDK%\bin\setenv" %DDK% %mymode% %myprofile% %myos% no_oacr
-if errorlevel 1 goto error
-
 cd /d %root%
 cd src
-nmake
+msbuild tap-windows.vcxproj /p:Configuration=Release /p:Platform=%2
 if errorlevel 1 goto error
 
-set rc=0
+set exitstatus=0
 goto end
 
 :error
 echo FAIL %myos%-%myprofile%-%mymode%
-set rc=1
+set exitstatus=1
 goto end
 
 :end

@@ -13,3 +13,4 @@ src/amd64
 src/i386
 src/SOURCES
 src/config.h
+src/tap-windows.vcxproj

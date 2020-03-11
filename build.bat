@@ -30,26 +30,23 @@ setlocal
 
 call config-env.bat
 
-for /d %%d in (src\obj*) do rmdir /q /s %%d > nul 2>&1
-for %%f in (src\amd64\*.sys src\i386\*.sys) do del /s %%f > nul 2>&1
+del /s "src\x64\Release\*.obj" > nul 2>&1
+del /s "src\x64\Release\*.sys" > nul 2>&1
+rmdir /s /q "src\x64\Release\tap-windows" > nul 2>&1
 
-cmd /c _build WXP x86
-if errorlevel 1 goto error
 cmd /c _build WIN7 x64
 if errorlevel 1 goto error
 
-call installer\build
-
-set rc=0
+set exitstatus=0
 goto end
 
 :error
 echo FAIL
-set rc=1
+set exitstatus=1
 goto end
 
 :end
 
 endlocal
 
-exit /b %rc%
+exit /b %exitstatus%
