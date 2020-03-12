@@ -42,9 +42,12 @@
       <DisableSpecificWarnings>%(DisableSpecificWarnings);4057;4100;4101;4127;4189;4200;4201;4245;4267;4456</DisableSpecificWarnings>
       <TreatWarningAsError>false</TreatWarningAsError>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);TAP_DRIVER_MAJOR_VERSION=@PRODUCT_TAP_WIN_MAJOR@;TAP_DRIVER_MINOR_VERSION=@PRODUCT_TAP_WIN_MINOR@</PreprocessorDefinitions>
+      <Optimization>Full</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies);$(KernelBufferOverflowLib);$(DDK_LIB_PATH)ntoskrnl.lib;$(DDK_LIB_PATH)hal.lib;$(DDK_LIB_PATH)wmilib.lib;$(KMDF_LIB_PATH)$(KMDF_VER_PATH)\WdfLdr.lib;$(KMDF_LIB_PATH)$(KMDF_VER_PATH)\WdfDriverEntry.lib;ntstrsafe.lib;ndis.lib</AdditionalDependencies>
+      <LinkIncremental>false</LinkIncremental>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
