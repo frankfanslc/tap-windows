@@ -47,9 +47,8 @@ if errorlevel 1 goto ERROR
 :: Sign the driver
 
 echo Signing and timestamping the driver
-signtool sign /t %TIMESTAMP_SERVER% /td sha1 /fd sha1 /sha1 "%2" /v /ac %TAPDIR%\%CROSSCERT% %TAPDIR%\src\x64\Release\tap-windows\tapmullvad0901.cat
-signtool sign /as /tr %TIMESTAMP_SERVER% /td sha256 /fd sha256 /sha1 "%1" /v /ac %TAPDIR%\%CROSSCERT% %TAPDIR%\src\x64\Release\tap-windows\tapmullvad0901.cat
-
+signtool sign /t %TIMESTAMP_SERVER% /td sha1 /fd sha1 /f comodo.pfx /p "%1" /v %TAPDIR%\src\x64\Release\tap-windows\tapmullvad0901.cat
+signtool sign /as /tr %TIMESTAMP_SERVER% /td sha256 /fd sha256 /f comodo.pfx /p "%1" /v /ac %TAPDIR%\%CROSSCERT% %TAPDIR%\src\x64\Release\tap-windows\tapmullvad0901.cat
 if errorlevel 1 goto ERROR
 
 set exitstatus=0
