@@ -31,6 +31,7 @@ if not exist config-env.bat (
 )
 
 if [%1]==[] goto USAGE
+if [%2]==[] goto USAGE
 
 setlocal
 
@@ -46,7 +47,8 @@ if errorlevel 1 goto ERROR
 :: Sign the driver
 
 echo Signing and timestamping the driver
-signtool sign /tr %TIMESTAMP_SERVER% /td sha256 /fd sha256 /sha1 "%1" /v /ac %TAPDIR%\%CROSSCERT% %TAPDIR%\src\x64\Release\tap-windows\tapmullvad0901.cat
+signtool sign /t %TIMESTAMP_SERVER% /td sha1 /fd sha1 /sha1 "%2" /v /ac %TAPDIR%\%CROSSCERT% %TAPDIR%\src\x64\Release\tap-windows\tapmullvad0901.cat
+signtool sign /as /tr %TIMESTAMP_SERVER% /td sha256 /fd sha256 /sha1 "%1" /v /ac %TAPDIR%\%CROSSCERT% %TAPDIR%\src\x64\Release\tap-windows\tapmullvad0901.cat
 
 if errorlevel 1 goto ERROR
 
@@ -66,5 +68,5 @@ exit /b %exitstatus%
 
 :USAGE
 
-echo Usage: %0 ^<cert_sha1_hash^>
+echo Usage: %0 ^<certsha256_sha1_hash^> ^<certsha1_sha1_hash^>
 exit /b 1
